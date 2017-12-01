@@ -1,0 +1,10 @@
+{
+    "name": "nine/multi-process",
+    "authors": [
+        {
+            "name": "nine",
+            "email": "nine@segmentfault.com"
+        }
+    ],
+    "require": {}
+}
