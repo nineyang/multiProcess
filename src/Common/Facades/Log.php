@@ -9,18 +9,8 @@ namespace MultiProcess\Common\Facades;
  */
 class Log extends Facade
 {
-    public function debug()
+    public static function getFacadeAccessor()
     {
-
-    }
-
-    public function info()
-    {
-
-    }
-
-    public function error()
-    {
-
+        return 'log';
     }
 }

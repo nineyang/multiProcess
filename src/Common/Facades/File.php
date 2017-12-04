@@ -9,5 +9,8 @@ namespace MultiProcess\Common\Facades;
 
 class File extends Facade
 {
-
+    public static function getFacadeAccessor()
+    {
+        return 'file';
+    }
 }

@@ -10,8 +10,8 @@ namespace MultiProcess\Common\Facades;
 
 class Shell extends Facade
 {
-    public function exec()
+    public static function getFacadeAccessor()
     {
-
+        return 'shell';
     }
 }

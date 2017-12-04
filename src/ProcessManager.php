@@ -4,7 +4,7 @@ namespace MultiProcess;
 
 use MultiProcess\Task\TaskInterface;
 use ArrayAccess;
-use MultiProcess\Common\Shell;
+use MultiProcess\Common\Facades\Shell;
 
 /**
  * User: Nine
