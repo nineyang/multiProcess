@@ -5,8 +5,7 @@
  * Time: 下午5:33
  */
 
-namespace MultiProcess\Common;
-
+namespace MultiProcess\Common\Facades;
 
 class File extends Facade
 {

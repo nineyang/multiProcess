@@ -7,5 +7,5 @@
 
 return [
     'worker' => __DIR__ . '/../bin/worker.php',
-    
+
 ];

@@ -1,6 +1,6 @@
 <?php
 
-namespace MultiProcess\Common;
+namespace MultiProcess\Common\Facades;
 
 /**
  * User: Nine

@@ -5,7 +5,7 @@
  * Time: 下午5:49
  */
 
-namespace MultiProcess\Common;
+namespace MultiProcess\Common\Facades;
 
 
 class Shell extends Facade
