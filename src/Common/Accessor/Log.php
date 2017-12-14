@@ -62,7 +62,7 @@ class Log
         $logFile = File::getLogFile();
         $params = $this->parseParams();
 
-        file_put_contents($logFile, $prefix . $params, FILE_APPEND);
+        file_put_contents($logFile, $prefix . $this->message . $params, FILE_APPEND);
 
     }
 
