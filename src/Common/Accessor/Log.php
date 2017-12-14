@@ -31,16 +31,22 @@ class Log
      */
     public $params;
 
+    /**
+     * @var
+     */
+    public $logFile;
 
     /**
      * @param $method
      */
     protected function outputToFile($method)
     {
+        # 没有传log的话就使用默认的logFile
+        $logFile = $this->logFile || File::getLogFile();
         $prefix = "[" . date(Config::get('log.content_format', self::CONTENT_FORMAT)) . "] " . Config::get('init
         .env') . '.' . $method . ':';
 
-        $this->console($prefix);
+        $this->console($prefix , $logFile);
     }
 
     /**
@@ -59,22 +65,23 @@ class Log
 
     /**
      * @param string $prefix
+     * @param string $logFile
      */
-    protected function console($prefix = '')
+    protected function console($prefix = '' , $logFile)
     {
-        $logFile = File::getLogFile();
         $params = $this->parseParams();
 
         file_put_contents($logFile, $prefix . $this->message . $params, FILE_APPEND);
     }
 
     /**
+     * $name 可以是 DEBUG 或 INFO 或 ERROR 或自定义，由你自己决定
      * @param $name
      * @param $arguments
      */
     public function __call($name, $arguments)
     {
-        list($this->message, $this->params) = $arguments;
+        list($this->message, $this->params , $this->logFile) = $arguments;
         $this->outputToFile(strtoupper($name));
     }
 }

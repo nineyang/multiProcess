@@ -67,9 +67,4 @@ class Config
 
         return $default;
     }
-
-    private function input()
-    {
-
-    }
 }

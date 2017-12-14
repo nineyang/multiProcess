@@ -113,8 +113,7 @@ class BaseTask implements TaskInterface
     {
         $this
             ->addCommand($this->getPHPBindir())
-            ->addCommand(Config::get('init.worker'))
-            ->addCommand($this->num);
+            ->addCommand(Config::get('init.worker'));
     }
 
     /**
@@ -125,7 +124,7 @@ class BaseTask implements TaskInterface
         foreach (range(1, $this->num) as $number) {
             exec(implode(' ', $this->_command), $info);
 
-            return $info;
+            echo $info;
         }
     }
 

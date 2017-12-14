@@ -26,7 +26,7 @@ class ClosureTask extends BaseTask
     public function __construct($name, Closure $closure, $num = 1)
     {
         $this->task = $closure;
-        parent::__construct($name , $num);
+        parent::__construct($name, $num);
     }
 
     /**
