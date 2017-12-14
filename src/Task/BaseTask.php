@@ -128,7 +128,7 @@ class BaseTask implements TaskInterface
                     die('Fork failed');
                     break;
                 case 0:
-                    Log::info(posix_getpid() . " start work");
+                    Log::info(posix_getpid() . " start work", ['task_name' => $this->name]);
                     ($this->task)();
                     Log::info(posix_getpid() . " end");
                     break;

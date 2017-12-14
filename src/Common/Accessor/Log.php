@@ -54,9 +54,9 @@ class Log
     protected function parseParams()
     {
         if (is_array($this->params)) {
-            return json_encode($this->params);
+            return ' ' . json_encode($this->params);
         } elseif (is_string($this->params)) {
-            return $this->params;
+            return ' ' . $this->params;
         } else {
             return null;
         }

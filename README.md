@@ -1,17 +1,6 @@
-<?php
-/**
- * User: Nine
- * Date: 2017/12/1
- * Time: 下午4:28
- */
+## How to use
 
-spl_autoload_register(function ($class_name) {
-    $parts = explode('\\', $class_name);
-    array_shift($parts);
-    $class = 'src/' . implode('/', $parts) . '.php';
-    require_once $class;
-});
-
+```php
 $task1 = new \MultiProcess\Task\ClosureTask('task1', function () {
     echo 'task1';
 } , 2);
@@ -24,3 +13,4 @@ $manager
     ->addTask($task1)
     ->addTask($task2)
     ->run();
+```
