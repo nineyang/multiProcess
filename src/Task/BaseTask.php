@@ -11,6 +11,7 @@ namespace MultiProcess\Task;
 use Closure;
 use Exception;
 use MultiProcess\Common\Facades\Config;
+use MultiProcess\Common\Facades\Log;
 
 /**
  * Class BaseTask
@@ -122,11 +123,20 @@ class BaseTask implements TaskInterface
     public function exec()
     {
         foreach (range(1, $this->num) as $number) {
-            exec(implode(' ', $this->_command), $info);
-
-            echo $info;
+            switch ($pid = pcntl_fork()) {
+                case -1:
+                    die('Fork failed');
+                    break;
+                case 0:
+                    Log::info(posix_getpid() . " start work");
+                    ($this->task)();
+                    Log::info(posix_getpid() . " end");
+                    break;
+                default:
+                    $res = pcntl_waitpid($pid, $status, WNOHANG);
+                    exit();
+                    break;
+            }
         }
     }
-
-
 }

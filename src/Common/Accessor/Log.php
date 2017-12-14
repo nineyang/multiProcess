@@ -29,12 +29,12 @@ class Log
     /**
      * @var
      */
-    public $params;
+    public $params = '';
 
     /**
      * @var
      */
-    public $logFile;
+    public $logFile = '';
 
     /**
      * @param $method
@@ -42,11 +42,10 @@ class Log
     protected function outputToFile($method)
     {
         # 没有传log的话就使用默认的logFile
-        $logFile = $this->logFile || File::getLogFile();
-        $prefix = "[" . date(Config::get('log.content_format', self::CONTENT_FORMAT)) . "] " . Config::get('init
-        .env') . '.' . $method . ':';
+        $this->logFile || $this->logFile = File::getLogFile();
+        $prefix = "[" . date(Config::get('log.content_format', self::CONTENT_FORMAT)) . "] " . Config::get('init.env') . '.' . $method . ':';
 
-        $this->console($prefix , $logFile);
+        $this->console($prefix, $this->logFile);
     }
 
     /**
@@ -67,11 +66,11 @@ class Log
      * @param string $prefix
      * @param string $logFile
      */
-    protected function console($prefix = '' , $logFile)
+    protected function console($prefix = '', $logFile)
     {
         $params = $this->parseParams();
 
-        file_put_contents($logFile, $prefix . $this->message . $params, FILE_APPEND);
+        file_put_contents($logFile, $prefix . $this->message . $params . PHP_EOL, FILE_APPEND);
     }
 
     /**
@@ -81,7 +80,7 @@ class Log
      */
     public function __call($name, $arguments)
     {
-        list($this->message, $this->params , $this->logFile) = $arguments;
+        @list($this->message, $this->params, $this->logFile) = $arguments;
         $this->outputToFile(strtoupper($name));
     }
 }

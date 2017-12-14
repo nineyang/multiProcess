@@ -34,7 +34,7 @@ class ClosureTask extends BaseTask
      */
     public function handler()
     {
-        $this->addCommand(serialize($this->task))
+        $this->addCommand($this->task)
             ->exec();
     }
 }

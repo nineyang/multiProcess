@@ -12,10 +12,9 @@ spl_autoload_register(function ($class_name) {
     require_once $class;
 });
 
-
 $task1 = new \MultiProcess\Task\ClosureTask('task1', function () {
-    echo 'test1';
-});
+    echo 'task1';
+} , 2);
 $task2 = new \MultiProcess\Task\ClosureTask('task2', function () {
     echo 'task2';
 });
@@ -23,5 +22,4 @@ $manager = new \MultiProcess\ProcessManager();
 
 $manager
     ->addTask($task1)
-    ->addTask($task2)
     ->run();

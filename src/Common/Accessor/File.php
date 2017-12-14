@@ -29,11 +29,11 @@ class File
      */
     public function getLogFile($ext = '.log')
     {
-        $file = Config::get('log.base_path') . date(Config::get('log.filename_format', self::FILENAME_FORMAT)) . $ext;
+        $file = Config::get('log.base_path') . '/' . date(Config::get('log.filename_format', self::FILENAME_FORMAT)) . $ext;
 
-        if (file_exists($file)) {
+        if (!file_exists($file)) {
             return $this->makeFile($file);
-        } elseif (is_writable($file)) {
+        } elseif (!is_writable($file)) {
             chmod($file, self::READ_ADN_WRITE);
         }
 
@@ -50,6 +50,6 @@ class File
 
         fclose($fileHandler);
 
-        return '';
+        return $file;
     }
 }
