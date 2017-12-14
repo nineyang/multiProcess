@@ -16,9 +16,22 @@ use Closure;
  */
 class ClosureTask extends BaseTask
 {
-    public function __construct(Closure $closure , $num = 1)
+
+    /**
+     * ClosureTask constructor.
+     * @param $name
+     * @param Closure $closure
+     * @param int $num
+     */
+    public function __construct($name, Closure $closure, $num = 1)
     {
         $this->task = $closure;
-        $this->num = $num;
+        parent::__construct($name , $num);
+    }
+
+    public function handler()
+    {
+        $this->addCommand(serialize($this->task))
+            ->exec();
     }
 }

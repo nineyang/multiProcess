@@ -7,7 +7,10 @@
  */
 
 namespace MultiProcess\Task;
+
 use Closure;
+use Exception;
+use MultiProcess\Common\Facades\Config;
 
 /**
  * Class BaseTask
@@ -34,25 +37,92 @@ class BaseTask implements TaskInterface
     public $task;
 
     /**
+     * 任务名称
+     * @var
+     */
+    public $name;
+
+    /**
+     * @var array
+     */
+    private $_command = [];
+
+    /**
+     * BaseTask constructor.
+     * @param $name
+     * @param int $num
+     */
+    public function __construct($name, $num)
+    {
+        $this->name = $name;
+        $this->num = $num;
+        $this->initCommand();
+    }
+
+    /**
+     * @param $name
+     * @param $value
+     * @return $this
+     */
+    public function __set($name, $value)
+    {
+        $this->$name = $value;
+
+        return $this;
+    }
+
+    /**
+     * @param $name
+     * @return mixed
+     */
+    public function __get($name)
+    {
+        return $this->$name;
+    }
+
+    /**
      * 调度task
      */
     public function handler()
     {
-        $parts = explode('\\', static::class);
-        $method = 'handler' . array_pop($parts);
-
-        ## todo 这里要根据设置的num来发起需要开启的进程数量
-        if (method_exists(self::class, $method)) {
-            return $this->$method();
-        }
-
-        return null;
+        throw new Exception("Not found method:handler in class:" . static::class);
     }
 
-    public function handlerClosure()
+    /**
+     * @return string
+     */
+    public function getPHPBindir()
     {
-        if ($this->task instanceof Closure) {
-            $this->task();
+        return PHP_BINDIR . '/php';
+    }
+
+    /**
+     * @param $command
+     * @return $this
+     */
+    public function addCommand($command)
+    {
+        array_push($this->_command, $command);
+        return $this;
+    }
+
+    /**
+     * 初始化command
+     */
+    private function initCommand()
+    {
+        $this
+            ->addCommand($this->getPHPBindir())
+            ->addCommand(Config::get('init.worker'))
+            ->addCommand($this->num);
+    }
+
+    public function exec()
+    {
+        foreach (range(1, $this->num) as $number) {
+            exec(implode(' ', $this->_command), $info);
+
+            return $info;
         }
     }
 

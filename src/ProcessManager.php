@@ -3,7 +3,6 @@
 namespace MultiProcess;
 
 use MultiProcess\Task\TaskInterface;
-use ArrayAccess;
 use MultiProcess\Common\Facades\Shell;
 
 /**
@@ -11,14 +10,27 @@ use MultiProcess\Common\Facades\Shell;
  * Date: 2017/12/1
  * Time: 下午3:23
  */
-class ProcessManager implements ArrayAccess
+class ProcessManager
 {
+    /**
+     * @var array
+     */
     public $tasks = [];
 
+    /**
+     * @var array
+     */
     public $runnings = [];
 
+    /**
+     * @var array
+     */
     public $killed = [];
 
+    /**
+     * @var int
+     */
+    private $_sleep = 1000;
 
     /**
      * @param TaskInterface $task
@@ -43,32 +55,14 @@ class ProcessManager implements ArrayAccess
         return $this;
     }
 
+    /**
+     * 开始任务
+     */
     public function run()
     {
         foreach ($this->tasks as $task) {
-            Shell::exec('');
+            $this->tasks[$task->name] = $task->handler();
+            usleep($this->_sleep);
         }
-    }
-
-    public function offsetExists($pid)
-    {
-        return isset($this->runnings[$pid]);
-    }
-
-
-    public function offsetGet($pid)
-    {
-        return $this->runnings[$pid];
-    }
-
-
-    public function offsetSet($pid, $value)
-    {
-
-    }
-
-    public function offsetUnset($pid)
-    {
-        unset($this->runnings[$pid]);
     }
 }

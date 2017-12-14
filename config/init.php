@@ -6,6 +6,6 @@
  */
 
 return [
-    'worker' => __DIR__ . '/../bin/worker.php',
-
+    'env' => 'local',
+    'worker' => realpath(__DIR__ . '/../bin/worker.php'),
 ];

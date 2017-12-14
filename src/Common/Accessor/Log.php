@@ -7,21 +7,36 @@
 
 namespace MultiProcess\Common\Accessor;
 
-
+/**
+ * Class Log
+ * @package MultiProcess\Common\Accessor
+ */
 class Log
 {
-    public function debug()
+
+    /**
+     * @var
+     */
+    public $message;
+
+    /**
+     * @var
+     */
+    public $params;
+
+
+    protected function outputToFile($method)
     {
 
     }
 
-    public function info()
+    /**
+     * @param $name
+     * @param $arguments
+     */
+    public function __call($name, $arguments)
     {
-
-    }
-
-    public function error()
-    {
-
+        list($this->message, $this->params) = $arguments;
+        $this->outputToFile(strtoupper($name));
     }
 }
