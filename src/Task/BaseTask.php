@@ -117,6 +117,9 @@ class BaseTask implements TaskInterface
             ->addCommand($this->num);
     }
 
+    /**
+     * @return mixed
+     */
     public function exec()
     {
         foreach (range(1, $this->num) as $number) {

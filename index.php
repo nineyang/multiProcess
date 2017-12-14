@@ -9,7 +9,7 @@ require_once 'src/ProcessManager.php';
 require_once 'src/Task/ClosureTask.php';
 
 $task = new \MultiProcess\Task\ClosureTask('test1', function () {
-    echo 'hello world';
+
 });
 
 $manager = new \MultiProcess\ProcessManager();

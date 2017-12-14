@@ -29,6 +29,9 @@ class ClosureTask extends BaseTask
         parent::__construct($name , $num);
     }
 
+    /**
+     *
+     */
     public function handler()
     {
         $this->addCommand(serialize($this->task))

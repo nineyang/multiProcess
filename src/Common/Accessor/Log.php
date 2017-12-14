@@ -32,6 +32,9 @@ class Log
     public $params;
 
 
+    /**
+     * @param $method
+     */
     protected function outputToFile($method)
     {
         $prefix = "[" . date(Config::get('log.content_format', self::CONTENT_FORMAT)) . "] " . Config::get('init
@@ -63,7 +66,6 @@ class Log
         $params = $this->parseParams();
 
         file_put_contents($logFile, $prefix . $this->message . $params, FILE_APPEND);
-
     }
 
     /**
