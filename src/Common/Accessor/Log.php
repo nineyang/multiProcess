@@ -47,15 +47,13 @@ class Log
         $this->console($this->getPrefix($method), $this->logFile);
     }
 
-
     /**
      *
      */
     public function outputCli()
     {
-        $prefix = $this->getPrefix('CONSOLE');
         $args = func_get_args();
-        array_unshift($args , $prefix);
+        array_unshift($args , $this->getPrefix('CONSOLE'));
 
         echo implode(" " , $args) . PHP_EOL;
     }
