@@ -3,7 +3,6 @@
 namespace MultiProcess;
 
 use MultiProcess\Task\TaskInterface;
-use MultiProcess\Common\Facades\Shell;
 
 /**
  * User: Nine

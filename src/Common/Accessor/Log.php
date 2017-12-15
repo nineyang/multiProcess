@@ -43,9 +43,30 @@ class Log
     {
         # 没有传log的话就使用默认的logFile
         $this->logFile || $this->logFile = File::getLogFile();
-        $prefix = "[" . date(Config::get('log.content_format', self::CONTENT_FORMAT)) . "] " . Config::get('init.env') . '.' . $method . ':';
 
-        $this->console($prefix, $this->logFile);
+        $this->console($this->getPrefix($method), $this->logFile);
+    }
+
+
+    /**
+     *
+     */
+    public function outputCli()
+    {
+        $prefix = $this->getPrefix('CONSOLE');
+        $args = func_get_args();
+        array_unshift($args , $prefix);
+
+        echo implode(" " , $args) . PHP_EOL;
+    }
+
+    /**
+     * @param $method
+     * @return string
+     */
+    protected function getPrefix($method)
+    {
+        return "[" . date(Config::get('log.content_format', self::CONTENT_FORMAT)) . "] " . Config::get('init.env') . '.' . $method . ':';
     }
 
     /**

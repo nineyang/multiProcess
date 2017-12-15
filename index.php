@@ -13,11 +13,11 @@ spl_autoload_register(function ($class_name) {
 });
 
 $task1 = new \MultiProcess\Task\ClosureTask('task1', function () {
-    echo 'task1';
-} , 2);
+    # todo something
+}, 2);
 $task2 = new \MultiProcess\Task\ClosureTask('task2', function () {
-    echo 'task2';
-} , 5);
+    # todo something
+}, 5);
 $manager = new \MultiProcess\ProcessManager();
 
 $manager

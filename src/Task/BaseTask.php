@@ -129,6 +129,11 @@ class BaseTask implements TaskInterface
                     break;
                 case 0:
                     Log::info(posix_getpid() . " start work", ['task_name' => $this->name]);
+                    Log::outputCli(
+                        posix_getpid(),
+                        "start work",
+                        "task name:{$this->name}"
+                    );
                     ($this->task)();
                     Log::info(posix_getpid() . " end");
                     break;
