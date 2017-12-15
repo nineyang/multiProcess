@@ -10,10 +10,10 @@ composer require nine/multi-process
 
 ```php
 $task1 = new \MultiProcess\Task\ClosureTask('task1', function () {
-    echo 'task1';
+    # do your task
 } , 2);
 $task2 = new \MultiProcess\Task\ClosureTask('task2', function () {
-    echo 'task2';
+    # do your task
 } , 5);
 $manager = new \MultiProcess\ProcessManager();
 
